@@ -15,12 +15,12 @@ Análise de Dados de Acidentes de Trânsito em Rodovias Federais no Estado de S�
 O projeto tem como objetivo analisar dados de acidentes de trânsito ocorridos em rodovias vfederais no estado de São Paulo, buscando identificar padrões relacionados à ocorrência dos  acidentes, como horários, locais e tipos de veículos envolvidos.
 
 ## Planejamento
-1) Definir o Tema do Projeto
-2) Formular o Objetivo do Projeto
-3) Criação e Organização do Repositório
-4) Definir, coletar a base de dados original e fazer o upload da mesma no repositório (pasta 'data')
-5) Descrever o processo de ETL
-6) Detalhar o planejamento do dashboard
+1) Definir o Tema do Projeto (até 08/03/2026)
+2) Formular o Objetivo do Projeto (até 08/03/2026)
+3) Criação e Organização do Repositório (até 15/03/2026)
+4) Definir, coletar a base de dados original e fazer o upload da mesma no repositório, pasta 'data' (até 15/03/2026)
+5) Descrever o processo de ETL (até 22/03/2026)
+6) Detalhar o planejamento do dashboard (até 22/03/2026)
 
 ## Ideia Inicial do Dashboard
 - quantidade de acidentes por cidade ou região
