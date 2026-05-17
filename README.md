@@ -1,105 +1,71 @@
 # PIgrupo59
-# Projeto Integrador do 1º trimestre de 2026 - GRUPO 25
-## Integrantes
-- FERNANDO CAMARA DE MORAES
-- JHULLY CAROLINY RODRIGUES VIEIRA DA SILVA
-- MURILO SANTOS DORIGO
-- RAUL ALEXANDRE MARIA
-- RONALDO KOJI YAMASAKI
-- TAMIRES FERREIRA NUNES
 
-## Tema do Projeto
-Análise de Dados de Acidentes de Trânsito em Rodovias Federais no Estado de São Paulo
+Dashboard academico em Streamlit para analise de acidentes em rodovias federais com foco no estado de Sao Paulo e benchmark nacional.
 
-## Objetivo
-O projeto tem como objetivo analisar dados de acidentes de trânsito ocorridos em rodovias federais no estado de São Paulo, buscando identificar padrões relacionados à ocorrência dos  acidentes, como horários, locais e tipos de veículos envolvidos.
+## Visao do projeto
 
-## Planejamento
-1) Definir o Tema do Projeto (até 08/03/2026)
-2) Formular o Objetivo do Projeto (até 08/03/2026)
-3) Criação e Organização do Repositório (até 15/03/2026)
-4) Definir, coletar a base de dados original e fazer o upload da mesma no repositório, pasta 'data' (até 15/03/2026)
-5) Descrever o processo de ETL (até 22/03/2026)
-6) Detalhar o planejamento do dashboard (até 22/03/2026)
+O repositorio usa a base publica de acidentes da PRF disponibilizada no Kaggle:
 
-## Base de Dados
-
-A base de dados utilizada neste projeto será obtida na plataforma Kaggle, que disponibiliza conjuntos de dados públicos para análise de dados.
-
-Dataset utilizado:
 https://www.kaggle.com/datasets/pedrogoncalv/brazilian-traffic-incidents-2007-to-2023
 
-O dataset contém informações sobre acidentes de trânsito ocorridos no Brasil entre os anos de 2007 e 2023, incluindo dados como:
+O app final trabalha com dois recortes derivados da base local versionada:
 
-- data do acidente
-- estado e município
-- causa do acidente
-- tipo de veículo envolvido
-- gravidade do acidente
-- horário da ocorrência
+- `SP`: recorte principal usado nas metricas e filtros do dashboard
+- `Brasil`: benchmark nacional calculado sobre o mesmo periodo disponivel localmente
 
-Para este projeto será realizado um recorte dos dados considerando principalmente os registros do estado de São Paulo, permitindo uma análise mais focada da ocorrência de acidentes na região.
+## Estrutura
 
----
+- `streamlit_app.py`: entrypoint recomendado para o Streamlit Cloud
+- `app/dashboard.py`: interface do dashboard
+- `src/etl.py`: pipeline para gerar as bases tratadas
+- `data/base_original.csv`: base original do projeto
+- `data/base_tratada.csv`: base tratada de SP
+- `data/base_brasil_tratada.csv`: base tratada do Brasil para benchmark
 
-## Planejamento do Processo ETL
+## Metricas personalizadas
 
-### Extract (Extração)
+O dashboard inclui metricas operacionais derivadas apenas dos campos presentes na base:
 
-Os dados serão obtidos a partir de um dataset público disponibilizado na plataforma Kaggle e serão importados para análise utilizando a linguagem Python.
+- total de acidentes, mortes e feridos graves
+- taxa de fatalidade por acidente
+- taxa de acidentes graves por acidente
+- indice de severidade
+- rodovias mais criticas por severidade media
+- municipios mais criticos por severidade media
+- janelas horarias mais criticas
+- ranking de causas com maior taxa de acidentes graves
+- contraste entre uso urbano e nao urbano
 
-### Transform (Transformação)
+Indice de severidade adotado:
 
-Durante essa etapa serão realizadas as seguintes ações utilizando a biblioteca Pandas:
+`5 x mortos + 3 x feridos graves + 1 x feridos leves`
 
-- remoção de dados duplicados  
-- tratamento de valores ausentes  
-- padronização das informações  
-- agrupamento de dados por região ou período  
-- criação de métricas para análise  
+## Como executar localmente
 
-### Load (Carga)
+1. Instale as dependencias:
 
-Após o tratamento dos dados, a base será armazenada em uma estrutura organizada para utilização na criação do dashboard.
+```bash
+pip install -r requirements.txt
+```
 
+2. Gere as bases tratadas:
 
-## Planejamento das Tarefas
+```bash
+python src/etl.py
+```
 
-Para o desenvolvimento do projeto, as atividades serão divididas entre os integrantes do grupo da seguinte forma:
+3. Rode o app:
 
-| Integrante | Responsabilidade |
-|------------|------------------|
-| Fernando Camara de Moraes | Organização do repositório e documentação
-| Jhully Caroliny Rodrigues Vieira da Silva | Coleta e extração da base de dados
-| Murilo Santos Dorigo | Limpeza e tratamento dos dados
-| Raul Alexandre Maria | Transformação e organização dos dados
-| Ronaldo Koji Yamasaki | Criação das métricas de análise 
-| Tamires Ferreira Nunes | Planejamento do projeto e apoio na documentação 
+```bash
+streamlit run streamlit_app.py
+```
 
-## Objetivo da Análise
+## Deploy no Streamlit Cloud
 
-O objetivo do projeto é realizar uma análise exploratória dos dados de acidentes de trânsito no estado de São Paulo, buscando identificar padrões relacionados a fatores como:
+Ao criar o app no Streamlit Cloud:
 
-- local do acidente  
-- horário de ocorrência  
-- tipo de veículo envolvido  
-- frequência dos acidentes  
+- selecione este repositorio
+- defina o arquivo principal como `streamlit_app.py`
+- mantenha `requirements.txt` na raiz
 
-A partir dessa análise serão desenvolvidas visualizações em um dashboard que facilitem a interpretação dos dados e auxiliem na identificação de possíveis fatores de risco.
-
-
-## Ideia Inicial do Dashboard
-- quantidade de acidentes por cidade ou região
-- horários com maior ocorrência de acidentes
-- tipos de veículos mais envolvidos em acidentes
-- evolução da quantidade de acidentes ao longo do tempo
-- indicadores com métricas gerais sobre os acidentes
-  
-## Tecnologias
-- Python
-- Pandas
-- Streamlit
-
-
-
-
+Nao ha dependencia de segredos, APIs externas ou tokens para o funcionamento basico do dashboard.
